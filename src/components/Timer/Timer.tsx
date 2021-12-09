@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
+import { ProgressBar } from "react-native-paper";
 import MainButton from "../MainButton/MainButton";
 
 interface Props {
@@ -61,9 +62,12 @@ const Timer = ({ min, isPaused, onStart, onEnd }: Props) => {
   }, [isPaused]);
 
   return (
-    <View style={styles(width).container}>
-      <Text style={styles(width).timerText}>{formatTime(millies)}</Text>
-      <MainButton timerOn={isPaused} onStart={onStart} />
+    <View>
+      <ProgressBar progress={1 - millies / minToMil(min)} color="white" />
+      <View style={styles(width).container}>
+        <Text style={styles(width).timerText}>{formatTime(millies)}</Text>
+        <MainButton timerOn={isPaused} onStart={onStart} />
+      </View>
     </View>
   );
 };
@@ -77,7 +81,7 @@ const styles = (width: number) =>
       minHeight: 300,
       marginLeft: "auto",
       marginRight: "auto",
-      marginTop: 30,
+      marginTop: 50,
       paddingTop: 20,
       paddingBottom: 30,
       backgroundColor: "rgba(255, 255, 255, 0.1)",

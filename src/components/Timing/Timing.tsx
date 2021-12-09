@@ -52,13 +52,16 @@ const Timing = (props: Prop) => {
 
 const styles = StyleSheet.create({
   buttonsContainer: {
+    flex: 0.3,
     flexWrap: "wrap",
     flexDirection: "row",
     width: "100%",
+    maxWidth: 450,
     justifyContent: "space-around",
     alignItems: "center",
     padding: 20,
     marginTop: 44,
+    marginHorizontal: "auto",
   },
   button: {
     alignItems: "center",

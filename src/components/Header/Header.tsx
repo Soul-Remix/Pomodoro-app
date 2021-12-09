@@ -15,8 +15,6 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: "center",
     padding: 18,
-    borderBottomWidth: 1,
-    borderBottomColor: "rgba(0, 0, 0, 0.1)",
   },
   logo: {
     fontSize: 20,
