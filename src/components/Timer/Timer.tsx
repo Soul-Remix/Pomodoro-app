@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import MainButton from "../MainButton/MainButton";
 
 interface Props {
@@ -18,9 +18,15 @@ const formatTime = (time: number) => {
   return formattedMin + ":" + formattedSec;
 };
 
+const minToMil = (min: number) => {
+  return min * 60 * 1000;
+};
+
 const Timer = ({ min, isPaused, onStart, onEnd }: Props) => {
-  const [millies, setMillies] = useState(min * 60 * 1000);
+  const [millies, setMillies] = useState(0);
   const interval: { current: NodeJS.Timeout | null } = useRef(null);
+
+  const { width } = useWindowDimensions();
 
   const countDown = () => {
     setMillies((old) => {
@@ -32,12 +38,18 @@ const Timer = ({ min, isPaused, onStart, onEnd }: Props) => {
   };
 
   useEffect(() => {
-    if (!isPaused) {
-      return;
-    }
+    setMillies(minToMil(min));
+  }, [min]);
 
+  useEffect(() => {
     if (millies === 0) {
       onEnd();
+      return;
+    }
+  }, [millies]);
+
+  useEffect(() => {
+    if (!isPaused) {
       return;
     }
 
@@ -46,36 +58,38 @@ const Timer = ({ min, isPaused, onStart, onEnd }: Props) => {
     return () => {
       clearInterval(interval.current as NodeJS.Timeout);
     };
-  }, [isPaused, millies]);
+  }, [isPaused]);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.timerText}>{formatTime(millies)}</Text>
+    <View style={styles(width).container}>
+      <Text style={styles(width).timerText}>{formatTime(millies)}</Text>
       <MainButton timerOn={isPaused} onStart={onStart} />
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 0.4,
-    width: "90%",
-    maxWidth: 500,
-    maxHeight: 400,
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: 30,
-    padding: 20,
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
-    borderRadius: 20,
-    justifyContent: "space-around",
-  },
-  timerText: {
-    color: "white",
-    fontSize: 100,
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-});
+const styles = (width: number) =>
+  StyleSheet.create({
+    container: {
+      flex: 0.4,
+      width: "90%",
+      maxWidth: 500,
+      minHeight: 300,
+      marginLeft: "auto",
+      marginRight: "auto",
+      marginTop: 30,
+      paddingTop: 20,
+      paddingBottom: 30,
+      backgroundColor: "rgba(255, 255, 255, 0.1)",
+      borderRadius: 20,
+      justifyContent: "space-around",
+    },
+    timerText: {
+      color: "white",
+      fontSize: width < 300 ? 80 : width < 500 ? 100 : 120,
+      fontWeight: "bold",
+      textAlign: "center",
+    },
+  });
 
 export default Timer;
