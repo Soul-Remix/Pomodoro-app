@@ -1,15 +1,17 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import Header from "./src/components/Header/Header";
+import MainScreen from "./src/screens/MainScreen/MainScreen";
 
 export default function App() {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.container}>
         <Header />
-        <StatusBar style="auto" />
+        <MainScreen />
       </View>
+      <StatusBar style="auto" />
     </SafeAreaView>
   );
 }
