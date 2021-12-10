@@ -12,9 +12,9 @@ const Header = () => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
-    height: 50,
     justifyContent: "center",
     padding: 18,
+    paddingTop: 40,
   },
   logo: {
     fontSize: 20,

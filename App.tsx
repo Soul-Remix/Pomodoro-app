@@ -15,7 +15,7 @@ export default function App() {
         <Header />
         <MainScreen />
       </View>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 }
@@ -31,5 +31,6 @@ const styles = (background?: string) =>
       width: "100%",
       maxWidth: 700,
       margin: "auto",
+      height: "100%",
     },
   });

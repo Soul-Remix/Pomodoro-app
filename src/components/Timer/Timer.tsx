@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { StyleSheet, Text, useWindowDimensions, View } from "react-native";
 import { ProgressBar } from "react-native-paper";
 import MainButton from "../MainButton/MainButton";
@@ -28,6 +28,8 @@ const Timer = ({ min, isPaused, onStart, onEnd }: Props) => {
   const interval: { current: NodeJS.Timeout | null } = useRef(null);
 
   const { width } = useWindowDimensions();
+
+  const minInMill = useMemo(() => minToMil(min), [min]);
 
   const countDown = () => {
     setMillies((old) => {
@@ -63,7 +65,7 @@ const Timer = ({ min, isPaused, onStart, onEnd }: Props) => {
 
   return (
     <View>
-      <ProgressBar progress={1 - millies / minToMil(min)} color="white" />
+      <ProgressBar progress={1 - millies / minInMill} color="white" />
       <View style={styles(width).container}>
         <Text style={styles(width).timerText}>{formatTime(millies)}</Text>
         <MainButton timerOn={isPaused} onStart={onStart} />
@@ -75,7 +77,6 @@ const Timer = ({ min, isPaused, onStart, onEnd }: Props) => {
 const styles = (width: number) =>
   StyleSheet.create({
     container: {
-      flex: 0.4,
       width: "90%",
       maxWidth: 500,
       minHeight: 300,

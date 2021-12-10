@@ -1,5 +1,11 @@
 import React from "react";
-import { Pressable, PressableProps, StyleSheet, Text } from "react-native";
+import {
+  Platform,
+  Pressable,
+  PressableProps,
+  StyleSheet,
+  Text,
+} from "react-native";
 import useStore from "../../store/store";
 
 interface Props extends PressableProps {
@@ -32,12 +38,14 @@ const styles = (bg?: string) =>
       marginRight: "auto",
       marginLeft: "auto",
       borderRadius: 3,
+      elevation: Platform.OS === "android" && Platform.Version < 28 ? 8 : 0,
       shadowColor: "rgb(235, 235, 235)",
       shadowOffset: { height: 8, width: 0 },
     },
     buttonActive: {
       transform: [{ translateY: 6 }],
       shadowOffset: { height: 0, width: 0 },
+      elevation: 0,
     },
     text: {
       fontSize: 22,
