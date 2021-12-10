@@ -3,21 +3,25 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
+import useStore from "../../store/store";
 
 interface Prop {
   onChangeTime: (num: number) => void;
 }
 
 const Timing = (props: Prop) => {
-  const [active, setActive] = useState(25);
+  const [active, setActive] = useState(1);
+
+  const setBg = useStore((state) => state.setBg);
 
   return (
     <View style={styles.buttonsContainer}>
       <Pressable
-        style={[styles.button, active === 25 && styles.active]}
+        style={[styles.button, active === 1 && styles.active]}
         onPress={() => {
           props.onChangeTime(25);
-          setActive(25);
+          setActive(1);
+          setBg("rgb(217, 85, 80)");
         }}
       >
         <Text style={styles.text}>25 Min</Text>
@@ -25,10 +29,11 @@ const Timing = (props: Prop) => {
         <Text style={styles.text}>Pomodoro</Text>
       </Pressable>
       <Pressable
-        style={[styles.button, active === 15 && styles.active]}
+        style={[styles.button, active === 2 && styles.active]}
         onPress={() => {
           props.onChangeTime(15);
-          setActive(15);
+          setActive(2);
+          setBg("rgb(76, 145, 149)");
         }}
       >
         <Text style={styles.text}>15 Min</Text>
@@ -36,10 +41,11 @@ const Timing = (props: Prop) => {
         <Text style={styles.text}>Long Rest</Text>
       </Pressable>
       <Pressable
-        style={[styles.button, active === 5 && styles.active]}
+        style={[styles.button, active === 3 && styles.active]}
         onPress={() => {
           props.onChangeTime(5);
-          setActive(5);
+          setActive(3);
+          setBg("rgb(69, 124, 163)");
         }}
       >
         <Text style={styles.text}>5 Min</Text>
