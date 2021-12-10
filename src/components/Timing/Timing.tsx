@@ -13,42 +13,43 @@ const Timing = (props: Prop) => {
   const [active, setActive] = useState(1);
 
   const setBg = useStore((state) => state.setBg);
+  const times = useStore((state) => state.times);
 
   return (
     <View style={styles.buttonsContainer}>
       <Pressable
         style={[styles.button, active === 1 && styles.active]}
         onPress={() => {
-          props.onChangeTime(25);
+          props.onChangeTime(times.pomodoro);
           setActive(1);
           setBg("rgb(217, 85, 80)");
         }}
       >
-        <Text style={styles.text}>25 Min</Text>
+        <Text style={styles.text}>{times.pomodoro} Min</Text>
         <MaterialIcons name="computer" size={24} color="white" />
         <Text style={styles.text}>Pomodoro</Text>
       </Pressable>
       <Pressable
         style={[styles.button, active === 2 && styles.active]}
         onPress={() => {
-          props.onChangeTime(15);
+          props.onChangeTime(times.long);
           setActive(2);
           setBg("rgb(76, 145, 149)");
         }}
       >
-        <Text style={styles.text}>15 Min</Text>
+        <Text style={styles.text}>{times.long} Min</Text>
         <MaterialCommunityIcons name="sofa" size={24} color="white" />
         <Text style={styles.text}>Long Rest</Text>
       </Pressable>
       <Pressable
         style={[styles.button, active === 3 && styles.active]}
         onPress={() => {
-          props.onChangeTime(5);
+          props.onChangeTime(times.short);
           setActive(3);
           setBg("rgb(69, 124, 163)");
         }}
       >
-        <Text style={styles.text}>5 Min</Text>
+        <Text style={styles.text}>{times.short} Min</Text>
         <SimpleLineIcons name="cup" size={24} color="white" />
         <Text style={styles.text}>Short Rest</Text>
       </Pressable>
