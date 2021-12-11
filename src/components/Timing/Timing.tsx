@@ -22,7 +22,7 @@ const Timing = (props: Prop) => {
         onPress={() => {
           props.onChangeTime(times.pomodoro);
           setActive(1);
-          setBg("rgb(217, 85, 80)");
+          setBg("rgb(69, 124, 163)");
         }}
       >
         <Text style={styles.text}>{times.pomodoro} Min</Text>
@@ -46,7 +46,7 @@ const Timing = (props: Prop) => {
         onPress={() => {
           props.onChangeTime(times.short);
           setActive(3);
-          setBg("rgb(69, 124, 163)");
+          setBg("rgb(217, 85, 80)");
         }}
       >
         <Text style={styles.text}>{times.short} Min</Text>

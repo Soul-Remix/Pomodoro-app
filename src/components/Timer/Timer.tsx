@@ -24,7 +24,7 @@ const minToMil = (min: number) => {
 };
 
 const Timer = ({ min, isPaused, onStart, onEnd }: Props) => {
-  const [millies, setMillies] = useState(0);
+  const [millies, setMillies] = useState(1);
   const interval: { current: NodeJS.Timeout | null } = useRef(null);
 
   const { width } = useWindowDimensions();

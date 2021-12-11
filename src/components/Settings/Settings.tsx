@@ -8,9 +8,10 @@ import {
   View,
 } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+
 import useStore from "../../store/store";
 import TimeSettings from "../TimeSettings/TimeSettings";
-import { Switch } from "react-native-paper";
+import SettingSwitch from "../SettingSwitch/SettingSwitch";
 
 interface Props {
   isOpen: boolean;
@@ -19,6 +20,8 @@ interface Props {
 
 const Settings = ({ isOpen, handleClose }: Props) => {
   const background = useStore((state) => state.background);
+  const settings = useStore((state) => state.settings);
+  const setSettings = useStore((state) => state.setSettings);
 
   return (
     <Modal animationType="slide" visible={isOpen} onRequestClose={handleClose}>
@@ -33,18 +36,21 @@ const Settings = ({ isOpen, handleClose }: Props) => {
           <Text style={styles().text}>Time (minutes)</Text>
           <TimeSettings />
           <View style={styles().hr}></View>
-          <View style={styles().settingContainer}>
-            <Text style={styles().text}>Keep Screen Awake</Text>
-            <Switch />
-          </View>
-          <View style={styles().settingContainer}>
-            <Text style={styles().text}>Vibrate Phone On End</Text>
-            <Switch />
-          </View>
-          <View style={styles().settingContainer}>
-            <Text style={styles().text}>Play Sound On end</Text>
-            <Switch value={true} />
-          </View>
+          <SettingSwitch
+            text="Keep Screen Awake"
+            value={settings.awake}
+            handleChange={() => setSettings({ awake: !settings.awake })}
+          />
+          <SettingSwitch
+            text="Vibrate Phone On End"
+            value={settings.vibrate}
+            handleChange={() => setSettings({ vibrate: !settings.vibrate })}
+          />
+          <SettingSwitch
+            text="Play Sound On end"
+            value={settings.alarm}
+            handleChange={() => setSettings({ alarm: !settings.alarm })}
+          />
           <View style={styles().hr}></View>
         </ScrollView>
       </View>
@@ -84,16 +90,6 @@ const styles = (bg?: string) =>
       borderWidth: 2,
       borderColor: "rgba(255, 255, 255, 0.38)",
       marginTop: 16,
-    },
-    settingContainer: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      marginTop: 16,
-      width: "90%",
-      maxWidth: 350,
-      marginRight: "auto",
-      marginLeft: "auto",
     },
   });
 
