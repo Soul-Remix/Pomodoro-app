@@ -7,17 +7,19 @@ interface Props {
   time: number;
   type: "pomodoro" | "long" | "short";
   handleChange: (val: string, type: "pomodoro" | "long" | "short") => void;
+  handleBlur: (type: "pomodoro" | "long" | "short") => void;
 }
 
-const TimeInput = ({ text, type, time, handleChange }: Props) => {
+const TimeInput = ({ text, type, time, handleChange, handleBlur }: Props) => {
   return (
     <View style={styles.inputContainer}>
       <Text style={styles.inputText}>{text}</Text>
       <TextInput
-        value={time > 0 ? `${time}` : "1"}
+        value={`${time}`}
         onChangeText={(val) => {
           handleChange(val, type);
         }}
+        onBlur={() => handleBlur(type)}
         style={styles.input}
         maxLength={2}
         keyboardType="number-pad"

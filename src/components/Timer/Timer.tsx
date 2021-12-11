@@ -11,7 +11,7 @@ interface Props {
 }
 
 const formatTime = (time: number) => {
-  const minutes = Math.floor(time / 60 / 1000) % 60;
+  const minutes = Math.floor(time / 60 / 1000);
   const seconds = Math.floor(time / 1000) % 60;
 
   const formattedMin = minutes < 10 ? "0" + minutes : minutes;

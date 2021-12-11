@@ -1,8 +1,16 @@
 import React from "react";
-import { Modal, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Modal,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import useStore from "../../store/store";
 import TimeSettings from "../TimeSettings/TimeSettings";
+import { Switch } from "react-native-paper";
 
 interface Props {
   isOpen: boolean;
@@ -15,7 +23,7 @@ const Settings = ({ isOpen, handleClose }: Props) => {
   return (
     <Modal animationType="slide" visible={isOpen} onRequestClose={handleClose}>
       <View style={styles(background).mainContainer}>
-        <View style={styles().container}>
+        <ScrollView style={styles().container}>
           <View style={styles().back}>
             <Pressable onPress={handleClose}>
               <MaterialIcons name="arrow-back" size={24} color="white" />
@@ -24,7 +32,21 @@ const Settings = ({ isOpen, handleClose }: Props) => {
           <Text style={styles().header}>Timer Setting</Text>
           <Text style={styles().text}>Time (minutes)</Text>
           <TimeSettings />
-        </View>
+          <View style={styles().hr}></View>
+          <View style={styles().settingContainer}>
+            <Text style={styles().text}>Keep Screen Awake</Text>
+            <Switch />
+          </View>
+          <View style={styles().settingContainer}>
+            <Text style={styles().text}>Vibrate Phone On End</Text>
+            <Switch />
+          </View>
+          <View style={styles().settingContainer}>
+            <Text style={styles().text}>Play Sound On end</Text>
+            <Switch value={true} />
+          </View>
+          <View style={styles().hr}></View>
+        </ScrollView>
       </View>
     </Modal>
   );
@@ -37,7 +59,7 @@ const styles = (bg?: string) =>
       backgroundColor: bg,
     },
     container: {
-      width: "95%",
+      width: "100%",
       maxWidth: 700,
       marginLeft: "auto",
       marginRight: "auto",
@@ -54,9 +76,24 @@ const styles = (bg?: string) =>
       marginTop: 20,
     },
     text: {
-      fontSize: 16,
+      fontSize: 18,
       color: "white",
       padding: 12,
+    },
+    hr: {
+      borderWidth: 2,
+      borderColor: "rgba(255, 255, 255, 0.38)",
+      marginTop: 16,
+    },
+    settingContainer: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginTop: 16,
+      width: "90%",
+      maxWidth: 350,
+      marginRight: "auto",
+      marginLeft: "auto",
     },
   });
 

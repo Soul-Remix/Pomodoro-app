@@ -10,8 +10,16 @@ const TimeSettings = () => {
   const handleChange = (val: string, type: "pomodoro" | "long" | "short") => {
     const numVal = +val;
     const timesObj = times;
-    timesObj[type] = numVal > 0 ? numVal : 1;
+    timesObj[type] = numVal;
     setTimes(timesObj);
+  };
+
+  const handleBlur = (type: "pomodoro" | "long" | "short") => {
+    const timesObj = times;
+    if (timesObj[type] <= 0) {
+      timesObj[type] = 1;
+      setTimes(timesObj);
+    }
   };
 
   return (
@@ -21,18 +29,21 @@ const TimeSettings = () => {
         type="pomodoro"
         time={times.pomodoro}
         handleChange={handleChange}
+        handleBlur={handleBlur}
       />
       <TimeInput
         text="Long Break"
         type="long"
         time={times.long}
         handleChange={handleChange}
+        handleBlur={handleBlur}
       />
       <TimeInput
         text="Short Rest"
         type="short"
         time={times.short}
         handleChange={handleChange}
+        handleBlur={handleBlur}
       />
     </View>
   );
