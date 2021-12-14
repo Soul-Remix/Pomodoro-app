@@ -65,7 +65,11 @@ const Timer = ({ min, isPaused, onStart, onEnd }: Props) => {
 
   return (
     <View>
-      <ProgressBar progress={1 - millies / minInMill} color="white" />
+      <ProgressBar
+        progress={1 - millies / minInMill}
+        color="white"
+        accessibilityRole="progressbar"
+      />
       <View style={styles(width).container}>
         <Text style={styles(width).timerText}>{formatTime(millies)}</Text>
         <MainButton timerOn={isPaused} onStart={onStart} />

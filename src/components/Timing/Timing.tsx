@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { SimpleLineIcons } from "@expo/vector-icons";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import useStore from "../../store/store";
 
 interface Prop {
@@ -22,11 +20,11 @@ const Timing = (props: Prop) => {
         onPress={() => {
           props.onChangeTime(times.pomodoro);
           setActive(1);
-          setBg("rgb(69, 124, 163)");
+          setBg("rgb(76, 145, 149)");
         }}
       >
         <Text style={styles.text}>{times.pomodoro} Min</Text>
-        <MaterialIcons name="computer" size={24} color="white" />
+        <MaterialCommunityIcons name="laptop" size={24} color="white" />
         <Text style={styles.text}>Pomodoro</Text>
       </Pressable>
       <Pressable
@@ -34,7 +32,7 @@ const Timing = (props: Prop) => {
         onPress={() => {
           props.onChangeTime(times.long);
           setActive(2);
-          setBg("rgb(76, 145, 149)");
+          setBg("rgb(69, 124, 163)");
         }}
       >
         <Text style={styles.text}>{times.long} Min</Text>
@@ -50,7 +48,7 @@ const Timing = (props: Prop) => {
         }}
       >
         <Text style={styles.text}>{times.short} Min</Text>
-        <SimpleLineIcons name="cup" size={24} color="white" />
+        <MaterialCommunityIcons name="coffee" size={24} color="white" />
         <Text style={styles.text}>Short Rest</Text>
       </Pressable>
     </View>

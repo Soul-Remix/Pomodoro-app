@@ -8,13 +8,13 @@ import { Vibration } from "react-native";
 import useStore from "../../store/store";
 
 const MainScreen = () => {
-  const [isStarted, setIsStarted] = useState(false);
-  const [minutes, setMinutes] = useState(0.1);
-  const [buttonSound, setButtonSound]: any = useState();
-  const [alarmSound, setAlarmSound]: any = useState();
-
   const times = useStore((state) => state.times);
   const settings = useStore((state) => state.settings);
+
+  const [isStarted, setIsStarted] = useState(false);
+  const [minutes, setMinutes] = useState(times.pomodoro);
+  const [buttonSound, setButtonSound]: any = useState();
+  const [alarmSound, setAlarmSound]: any = useState();
 
   const onStart = async () => {
     setIsStarted(!isStarted);
